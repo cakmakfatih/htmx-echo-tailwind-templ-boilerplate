@@ -11,11 +11,7 @@ type IndexController struct {
 	rg *echo.Group
 }
 
-func indexHandler(c echo.Context) error {
-	return internals.RenderTempl(c, http.StatusOK, pages.Home())
-}
-
-func (c *IndexController) Register() {
+func (c *IndexController) register() {
 	c.rg.GET("", indexHandler)
 }
 
@@ -23,4 +19,8 @@ func NewIndexController(rg *echo.Group) *IndexController {
 	return &IndexController{
 		rg: rg,
 	}
+}
+
+func indexHandler(c echo.Context) error {
+	return internals.RenderTempl(c, http.StatusOK, pages.Home())
 }

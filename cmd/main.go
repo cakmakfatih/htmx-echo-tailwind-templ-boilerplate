@@ -12,7 +12,7 @@ func main() {
 	indexRG := e.Group("/")
 
 	indexController := controllers.NewIndexController(indexRG)
-	indexController.Register()
+	controllers.RegisterController(indexController)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
