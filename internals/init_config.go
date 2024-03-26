@@ -35,7 +35,7 @@ func (h *hClient) NewRequest(method string, path string, body io.Reader) (resp *
 		return nil, err
 	}
 
-	return h.c.Do(r)
+	return h.c.Do(req)
 }
 
 func NewHClient(token string, baseURL string) *hClient {
