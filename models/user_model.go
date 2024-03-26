@@ -5,7 +5,6 @@ import (
 	"echochat/internals"
 	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
 )
 
@@ -33,8 +32,6 @@ func RegisterUser(ur UserRegisterRequest) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		readRes, _ := io.ReadAll(resp.Body)
-		fmt.Println(string(readRes))
 		fmt.Println("Unexpected status code:", resp.StatusCode)
 		return
 	}

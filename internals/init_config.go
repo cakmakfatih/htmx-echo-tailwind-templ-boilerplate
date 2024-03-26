@@ -21,11 +21,21 @@ type hClient struct {
 }
 
 func (h *hClient) Post(path string, body io.Reader) (resp *http.Response, err error) {
-	return h.c.Post(h.baseURL+path, "application/json", body)
+	return h.c.Post(fmt.Sprintf("%v%v", h.baseURL, path), "application/json", body)
 }
 
 func (h *hClient) Get(path string) (resp *http.Response, err error) {
-	return h.c.Get(h.baseURL + path)
+	return h.c.Get(fmt.Sprintf("%v%v", h.baseURL, path))
+}
+
+func (h *hClient) NewRequest(method string, path string, body io.Reader) (resp *http.Response, err error) {
+	req, err := http.NewRequest(method, fmt.Sprintf("%v%v", h.baseURL, path), body)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return h.c.Do(r)
 }
 
 func NewHClient(token string, baseURL string) *hClient {
