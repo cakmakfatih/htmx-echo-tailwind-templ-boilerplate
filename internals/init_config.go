@@ -11,6 +11,8 @@ import (
 	"os"
 )
 
+var C Config
+
 type Config struct {
 	Pb *hClient
 }
@@ -69,8 +71,6 @@ func (t *transport) RoundTrip(req *http.Request) (*http.Response, error) {
 
 	return t.UnderlyingTransport.RoundTrip(req)
 }
-
-var C Config
 
 func pbAdminAuth() (string, error) {
 	url := fmt.Sprintf("%v/api/admins/auth-with-password", os.Getenv("PB_URL"))
